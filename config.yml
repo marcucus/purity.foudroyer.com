@@ -1,0 +1,1410 @@
+backend:
+  name: git-gateway
+  branch: master
+  commit_messages:
+    create: "Create {{collection}} “{{slug}}”"
+    update: "Update {{collection}} “{{slug}}”"
+    delete: "Delete {{collection}} “{{slug}}”"
+    uploadMedia: "[skip ci] Upload “{{path}}”"
+    deleteMedia: "[skip ci] Delete “{{path}}”"
+search: false
+publish_mode: editorial_workflow
+local_backend:
+  url: "http://localhost:8081/api/v1"
+  allowed_hosts:
+    - 192.168.0.1
+media_folder: cms/assets
+public_folder: ../assets
+collections:
+  - name: page
+    label: "\U0001F4D1 Pages"
+    folder: cms/pages
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{minute}}-{{second}}"
+    fields:
+      - label: url
+        name: url
+        widget: string
+      - label: type
+        name: type
+        widget: hidden
+        default: page
+      - label: seo
+        name: seo
+        widget: object
+        fields:
+          - label: title
+            name: title
+            widget: string
+          - label: description
+            name: description
+            widget: string
+      - label: Published At
+        name: published_at
+        widget: datetime
+        date_format: DD.MM.YYYY
+        time_format: "HH:mm"
+        picker_utc: false
+      - label: Updated At
+        name: updated_at
+        widget: datetime
+        date_format: DD.MM.YYYY
+        time_format: "HH:mm"
+        picker_utc: false
+      - label: Content
+        name: content
+        widget: list
+        types:
+          - label: Marketing/Hero
+            name: marketing/hero
+            widget: object
+            summary: "{{fields.title.value}}"
+            fields:
+              - label: Label
+                name: label
+                widget: object
+                collapsed: true
+                summary: "{{fields.value}}"
+                fields:
+                  - label: value
+                    name: value
+                    widget: string
+                    default: default text
+                  - label: component
+                    name: component
+                    widget: select
+                    hint: html tag that will be used
+                    options:
+                      - h1
+                      - h2
+                      - h3
+                      - h4
+                      - h5
+                      - h6
+                      - p
+                    default: p
+              - label: Title
+                name: title
+                widget: object
+                collapsed: true
+                summary: "{{fields.value}}"
+                fields:
+                  - label: value
+                    name: value
+                    widget: string
+                    default: default text
+                  - label: component
+                    name: component
+                    widget: select
+                    hint: html tag that will be used
+                    options:
+                      - h1
+                      - h2
+                      - h3
+                      - h4
+                      - h5
+                      - h6
+                      - p
+                    default: p
+              - label: Description
+                name: description
+                widget: string
+                default: >-
+                  We’re different. Flex is the only saas business platform that
+                  lets you run your business on one platform, seamlessly across
+                  all digital channels.
+              - label: Image
+                name: image
+                widget: object
+                summary: "{{fields.src}}"
+                fields:
+                  - label: src
+                    name: src
+                    widget: image
+                    choose_url: false
+                    default: ../assets/header.jpg
+                    hint: >-
+                      the image should have a max with as 600px. You can use
+                      https://www.iloveimg.com/resize-image for online resizer
+                      and https://tinypng.com/ for compress images
+                    media_library:
+                      config:
+                        max_file_size: 512000
+                  - label: alt
+                    name: alt
+                    widget: string
+              - label: Buttons
+                name: buttons
+                widget: list
+                fields:
+                  - label: Label
+                    name: label
+                    widget: string
+                    default: default text
+                  - label: url
+                    name: url
+                    widget: string
+                    hint: >-
+                      Use a relative URL (e.g. /about) if the link is an
+                      internal link.
+                  - label: Rel
+                    name: rel
+                    widget: select
+                    options:
+                      - follow
+                      - no-follow
+                      - obfuscated
+                    default: follow
+                  - label: Target
+                    name: target
+                    widget: select
+                    options:
+                      - self
+                      - blank
+                    default: self
+                  - label: theme
+                    name: theme
+                    widget: select
+                    options:
+                      - primary
+                      - secondary
+                    default: primary
+          - &ref_0
+            label: Marketing/Discover
+            name: marketing/discover
+            widget: object
+            summary: "{{fields.title.value}}"
+            fields:
+              - label: Label
+                name: label
+                widget: object
+                collapsed: true
+                summary: "{{fields.value}}"
+                fields:
+                  - label: value
+                    name: value
+                    widget: string
+                    default: default text
+                  - label: component
+                    name: component
+                    widget: select
+                    hint: html tag that will be used
+                    options:
+                      - h1
+                      - h2
+                      - h3
+                      - h4
+                      - h5
+                      - h6
+                      - p
+                    default: p
+              - label: Title
+                name: title
+                widget: object
+                collapsed: true
+                summary: "{{fields.value}}"
+                fields:
+                  - label: value
+                    name: value
+                    widget: string
+                    default: default text
+                  - label: component
+                    name: component
+                    widget: select
+                    hint: html tag that will be used
+                    options:
+                      - h1
+                      - h2
+                      - h3
+                      - h4
+                      - h5
+                      - h6
+                      - p
+                    default: p
+              - label: Description
+                name: description
+                widget: string
+                default: >-
+                  Le Temple du Haïku, c'est à la fois un espace de partage
+                  d’haïku, mais également un lieu dans lequel on se ressource,
+                  on découvre la vie des anciens poètes japonais. On souhaite
+                  mettre en avant ces artistes en vous partageant leurs haïkus,
+                  mais également leur vie passée.
+              - label: Image
+                name: image
+                widget: object
+                summary: "{{fields.src}}"
+                fields:
+                  - label: src
+                    name: src
+                    widget: image
+                    choose_url: false
+                    default: ../assets/header.jpg
+                    hint: >-
+                      the image should have a max with as 600px. You can use
+                      https://www.iloveimg.com/resize-image for online resizer
+                      and https://tinypng.com/ for compress images
+                    media_library:
+                      config:
+                        max_file_size: 512000
+                  - label: alt
+                    name: alt
+                    widget: string
+              - label: To
+                name: to
+                widget: object
+                summary: "{{fields.label}}"
+                collapsed: true
+                fields:
+                  - label: Label
+                    name: label
+                    widget: string
+                    default: default text
+                  - label: url
+                    name: url
+                    widget: string
+                    hint: >-
+                      Use a relative URL (e.g. /about) if the link is an
+                      internal link.
+                  - label: Rel
+                    name: rel
+                    widget: select
+                    options:
+                      - follow
+                      - no-follow
+                      - obfuscated
+                    default: follow
+                  - label: Target
+                    name: target
+                    widget: select
+                    options:
+                      - self
+                      - blank
+                    default: self
+          - &ref_2
+            label: Marketing/Newsletter
+            name: marketing/newsletter
+            widget: object
+            summary: "{{fields.title.value}}"
+            fields:
+              - label: Title
+                name: title
+                widget: object
+                collapsed: true
+                summary: "{{fields.value}}"
+                fields:
+                  - label: value
+                    name: value
+                    widget: string
+                    default: default text
+                  - label: component
+                    name: component
+                    widget: select
+                    hint: html tag that will be used
+                    options:
+                      - h1
+                      - h2
+                      - h3
+                      - h4
+                      - h5
+                      - h6
+                      - p
+                    default: p
+              - label: Description
+                name: description
+                widget: string
+                default: Stay in the loop with everything you need to know.
+              - label: Input
+                name: input
+                widget: object
+                fields:
+                  - label: placeholder
+                    name: placeholder
+                    widget: string
+                    default: Enter your email
+                  - label: method
+                    name: method
+                    default: POST
+                    widget: select
+                    options:
+                      - POST
+                      - GET
+                  - label: action
+                    name: action
+                    widget: string
+                    default: default text
+              - label: Button
+                name: button
+                widget: string
+                default: Subscribe
+          - &ref_1
+            label: Marketing/Faq
+            name: marketing/faq
+            widget: object
+            summary: "{{fields.title.value}}"
+            fields:
+              - label: Label
+                name: label
+                widget: string
+                default: FAQ
+              - label: Title
+                name: title
+                widget: object
+                collapsed: true
+                summary: "{{fields.value}}"
+                fields:
+                  - label: value
+                    name: value
+                    widget: string
+                    default: default text
+                  - label: component
+                    name: component
+                    widget: select
+                    hint: html tag that will be used
+                    options:
+                      - h1
+                      - h2
+                      - h3
+                      - h4
+                      - h5
+                      - h6
+                      - p
+                    default: p
+              - label: Description
+                name: description
+                widget: string
+                default: Stay in the loop with everything you need to know.
+              - label: Items
+                name: items
+                widget: list
+                fields:
+                  - label: question
+                    name: question
+                    widget: string
+                    default: The question
+                  - label: answer
+                    name: answer
+                    widget: string
+                    default: The answer
+                  - label: component
+                    name: component
+                    widget: select
+                    hint: html tag that will be used for the question element
+                    options:
+                      - h1
+                      - h2
+                      - h3
+                      - h4
+                      - h5
+                      - h6
+                      - p
+                    default: p
+              - label: CTA
+                name: cta
+                widget: object
+                collapsed: true
+                fields:
+                  - label: visible
+                    name: visible
+                    widget: boolean
+                    default: true
+                  - label: Title
+                    name: title
+                    widget: object
+                    collapsed: true
+                    summary: "{{fields.value}}"
+                    fields:
+                      - label: value
+                        name: value
+                        widget: string
+                        default: default text
+                      - label: component
+                        name: component
+                        widget: select
+                        hint: html tag that will be used
+                        options:
+                          - h1
+                          - h2
+                          - h3
+                          - h4
+                          - h5
+                          - h6
+                          - p
+                        default: p
+                  - label: Description
+                    name: description
+                    widget: string
+                    default: >-
+                      Flex is a Small SaaS Business. Flex isn’t a traditional
+                      company.
+                  - label: Button
+                    name: button
+                    widget: object
+                    summary: "{{fields.label}}"
+                    collapsed: true
+                    fields:
+                      - label: Label
+                        name: label
+                        widget: string
+                        default: default text
+                      - label: url
+                        name: url
+                        widget: string
+                        hint: >-
+                          Use a relative URL (e.g. /about) if the link is an
+                          internal link.
+                      - label: Rel
+                        name: rel
+                        widget: select
+                        options:
+                          - follow
+                          - no-follow
+                          - obfuscated
+                        default: follow
+                      - label: Target
+                        name: target
+                        widget: select
+                        options:
+                          - self
+                          - blank
+                        default: self
+          - label: Marketing/Category
+            name: marketing/category
+            widget: object
+            summary: "{{fields.title.value}}"
+            fields:
+              - label: Title
+                name: title
+                widget: object
+                collapsed: true
+                summary: "{{fields.value}}"
+                fields:
+                  - label: value
+                    name: value
+                    widget: string
+                    default: default text
+                  - label: component
+                    name: component
+                    widget: select
+                    hint: html tag that will be used
+                    options:
+                      - h1
+                      - h2
+                      - h3
+                      - h4
+                      - h5
+                      - h6
+                      - p
+                    default: p
+              - label: Description
+                name: description
+                widget: string
+                default: default text
+              - label: category
+                name: category
+                widget: relation
+                collection: category
+                value_field: id
+                search_fields:
+                  - name
+                display_fields:
+                  - name
+              - label: number of articles
+                name: nbArticles
+                widget: number
+                default: 6
+                value_type: int
+                max: 12
+              - label: More
+                name: more
+                widget: object
+                fields:
+                  - label: Label
+                    name: label
+                    widget: string
+                    default: default text
+                  - label: Rel
+                    name: rel
+                    widget: select
+                    options:
+                      - follow
+                      - no-follow
+                      - obfuscated
+                    default: follow
+                  - label: Target
+                    name: target
+                    widget: select
+                    options:
+                      - self
+                      - blank
+                    default: self
+          - label: Marketing/Cloud
+            name: marketing/cloud
+            widget: object
+            summary: "{{fields.title.value}}"
+            fields:
+              - label: Label
+                name: label
+                widget: string
+                default: default text
+              - label: Title
+                name: title
+                widget: object
+                collapsed: true
+                summary: "{{fields.value}}"
+                fields:
+                  - label: value
+                    name: value
+                    widget: string
+                    default: default text
+                  - label: component
+                    name: component
+                    widget: select
+                    hint: html tag that will be used
+                    options:
+                      - h1
+                      - h2
+                      - h3
+                      - h4
+                      - h5
+                      - h6
+                      - p
+                    default: p
+              - label: Description
+                name: description
+                widget: string
+                default: default text
+              - label: Cloud
+                name: cloud
+                widget: list
+                fields:
+                  - label: src
+                    name: src
+                    widget: image
+                    choose_url: false
+                    default: ../assets/header.jpg
+                    hint: the image should have a max with = 60px
+                    media_library:
+                      config:
+                        max_file_size: 512000
+                  - label: alt
+                    name: alt
+                    widget: string
+          - &ref_3
+            label: Rich Text
+            name: article/rich_text
+            widget: object
+            summary: "{{fields.content}}"
+            fields:
+              - label: content
+                name: content
+                widget: markdown
+                editor_components: []
+                modes:
+                  - rich_text
+                buttons:
+                  - bold
+                  - italic
+                  - code
+                  - link
+                  - bulleted-list
+                  - numbered-list
+          - &ref_4
+            label: title
+            name: article/title
+            widget: object
+            collapsed: true
+            summary: "{{fields.value}}"
+            fields:
+              - label: value
+                name: value
+                widget: string
+                default: default text
+              - label: component
+                name: component
+                widget: select
+                hint: html tag that will be used
+                options:
+                  - h2
+                  - h3
+                  - h4
+                  - h5
+                  - h6
+                default: h2
+              - label: id
+                name: id
+                widget: string
+          - &ref_5
+            label: Quote
+            name: article/quote
+            widget: object
+            summary: "{{fields.text}}"
+            fields:
+              - label: text
+                name: text
+                widget: markdown
+                editor_components: []
+                modes:
+                  - rich_text
+                minimal: true
+                buttons:
+                  - bold
+                  - italic
+                  - link
+              - label: author
+                name: author
+                minimal: true
+                widget: markdown
+                editor_components: []
+                modes:
+                  - rich_text
+                buttons:
+                  - bold
+                  - italic
+                  - link
+          - &ref_6
+            label: Image
+            name: article/image
+            widget: object
+            summary: "{{fields.src}}"
+            fields:
+              - label: src
+                name: src
+                widget: image
+                choose_url: false
+                default: ../assets/header.jpg
+                hint: >-
+                  the image should have a max with as 600px. You can use
+                  https://www.iloveimg.com/resize-image for online resizer and
+                  https://tinypng.com/ for compress images
+                media_library:
+                  config:
+                    max_file_size: 512000
+              - label: alt
+                name: alt
+                widget: string
+  - name: author
+    label: ✍️ Authors
+    folder: cms/authors
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{minute}}-{{second}}"
+    fields:
+      - label: id
+        name: id
+        widget: uuid
+        hint: "This unique id was generated automacally, you cannot modify it"
+      - label: type
+        name: type
+        widget: hidden
+        default: author
+      - label: name
+        name: name
+        widget: string
+        default: John Doe
+  - name: article
+    label: "\U0001F58A Articles"
+    folder: cms/articles
+    create: true
+    sortable_fields:
+      - published_at
+      - updated_at
+    view_filter:
+      - label: Author
+        field: author
+        pattern: true
+    slug: "{{year}}-{{month}}-{{day}}-{{hour}}-{{minute}}-{{second}}"
+    fields:
+      - label: id
+        name: id
+        widget: uuid
+        hint: "This unique id was generated automacally, you cannot modify it"
+      - label: type
+        name: type
+        widget: hidden
+        default: article
+      - label: url
+        name: url
+        widget: string
+        default: default text
+      - label: seo
+        name: seo
+        widget: object
+        fields:
+          - label: title
+            name: title
+            widget: string
+          - label: description
+            name: description
+            widget: string
+      - label: Published At
+        name: published_at
+        widget: datetime
+        date_format: DD.MM.YYYY
+        time_format: "HH:mm"
+        picker_utc: false
+      - label: Updated At
+        name: updated_at
+        widget: datetime
+        date_format: DD.MM.YYYY
+        time_format: "HH:mm"
+        picker_utc: false
+      - label: category
+        name: category
+        widget: relation
+        collection: category
+        value_field: id
+        search_fields:
+          - name
+        display_fields:
+          - name
+      - label: author
+        name: author
+        widget: relation
+        collection: author
+        value_field: id
+        search_fields:
+          - name
+        display_fields:
+          - name
+      - label: title
+        name: title
+        widget: string
+        default: default text
+      - label: description
+        name: description
+        widget: string
+        default: default text
+      - label: illustration
+        name: illustration
+        widget: object
+        summary: "{{fields.src}}"
+        fields:
+          - label: src
+            name: src
+            widget: image
+            choose_url: false
+            default: ../assets/header.jpg
+            hint: >-
+              the image should have a max with as 600px. You can use
+              https://www.iloveimg.com/resize-image for online resizer and
+              https://tinypng.com/ for compress images
+            media_library:
+              config:
+                max_file_size: 512000
+          - label: alt
+            name: alt
+            widget: string
+      - label: Content
+        name: content
+        widget: list
+        types:
+          - *ref_0
+          - *ref_1
+          - *ref_2
+          - *ref_3
+          - *ref_4
+          - *ref_5
+          - *ref_6
+          - label: Table of Content
+            name: article/toc
+            widget: object
+            summary: "{{fields.title.value}}"
+            fields:
+              - label: Title
+                name: title
+                widget: object
+                collapsed: true
+                summary: "{{fields.value}}"
+                fields:
+                  - label: value
+                    name: value
+                    widget: string
+                    default: default text
+                  - label: component
+                    name: component
+                    widget: select
+                    hint: html tag that will be used
+                    options:
+                      - h1
+                      - h2
+                      - h3
+                      - h4
+                      - h5
+                      - h6
+                      - p
+                    default: p
+  - name: category
+    label: "\U0001F5C3 Categories"
+    folder: cms/categories
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{minute}}-{{second}}"
+    fields:
+      - label: id
+        name: id
+        widget: uuid
+        hint: "This unique id was generated automacally, you cannot modify it"
+      - label: type
+        name: type
+        widget: hidden
+        default: category
+      - label: url
+        name: url
+        widget: string
+        default: default text
+      - label: name
+        name: name
+        widget: string
+        default: default text
+      - label: seo
+        name: seo
+        widget: object
+        fields:
+          - label: title
+            name: title
+            widget: string
+          - label: description
+            name: description
+            widget: string
+      - label: Published At
+        name: published_at
+        widget: datetime
+        date_format: DD.MM.YYYY
+        time_format: "HH:mm"
+        picker_utc: false
+      - label: Updated At
+        name: updated_at
+        widget: datetime
+        date_format: DD.MM.YYYY
+        time_format: "HH:mm"
+        picker_utc: false
+      - label: Title
+        name: title
+        widget: object
+        collapsed: true
+        summary: "{{fields.value}}"
+        fields:
+          - label: value
+            name: value
+            widget: string
+            default: default text
+          - label: component
+            name: component
+            widget: select
+            hint: html tag that will be used
+            options:
+              - h1
+              - h2
+              - h3
+              - h4
+              - h5
+              - h6
+              - p
+            default: p
+      - label: description
+        name: description
+        widget: string
+        default: default text
+  - name: header
+    label: "\U0001F9ED Header"
+    files:
+      - file: cms/header/header.md
+        label: Navbar
+        name: navbar
+        fields:
+          - label: type
+            name: type
+            widget: hidden
+            default: header
+          - label: Logo
+            name: logo
+            widget: object
+            summary: "{{fields.src}}"
+            fields:
+              - label: src
+                name: src
+                widget: image
+                choose_url: false
+                default: ../assets/header.jpg
+                hint: please use a svg icon
+                media_library:
+                  config:
+                    max_file_size: 512000
+              - label: alt
+                name: alt
+                widget: string
+          - label: Tabs/Middle
+            name: tabs
+            widget: list
+            fields:
+              - label: Label
+                name: label
+                widget: string
+                default: default text
+              - label: url
+                name: url
+                widget: string
+                hint: >-
+                  Use a relative URL (e.g. /about) if the link is an internal
+                  link.
+              - label: Rel
+                name: rel
+                widget: select
+                options:
+                  - follow
+                  - no-follow
+                  - obfuscated
+                default: follow
+              - label: Target
+                name: target
+                widget: select
+                options:
+                  - self
+                  - blank
+                default: self
+              - label: theme
+                name: theme
+                widget: select
+                options:
+                  - link
+                  - button
+                default: link
+          - label: Tabs/Right
+            name: right
+            widget: list
+            fields:
+              - label: Label
+                name: label
+                widget: string
+                default: default text
+              - label: url
+                name: url
+                widget: string
+                hint: >-
+                  Use a relative URL (e.g. /about) if the link is an internal
+                  link.
+              - label: Rel
+                name: rel
+                widget: select
+                options:
+                  - follow
+                  - no-follow
+                  - obfuscated
+                default: follow
+              - label: Target
+                name: target
+                widget: select
+                options:
+                  - self
+                  - blank
+                default: self
+              - label: theme
+                name: theme
+                widget: select
+                options:
+                  - link
+                  - button
+                default: link
+  - name: drawer
+    label: "\U0001F4F1 Header / Mobile"
+    files:
+      - file: cms/drawer/drawer.md
+        label: Header / Mobile
+        name: drawer
+        fields:
+          - label: type
+            name: type
+            widget: hidden
+            default: drawer
+          - label: Logo
+            name: logo
+            widget: object
+            summary: "{{fields.src}}"
+            fields:
+              - label: src
+                name: src
+                widget: image
+                choose_url: false
+                default: ../assets/header.jpg
+                hint: >-
+                  the image should have a max with as 600px. You can use
+                  https://www.iloveimg.com/resize-image for online resizer and
+                  https://tinypng.com/ for compress images
+                media_library:
+                  config:
+                    max_file_size: 512000
+              - label: alt
+                name: alt
+                widget: string
+          - label: Tabs
+            name: tabs
+            widget: list
+            fields:
+              - label: Label
+                name: label
+                widget: string
+                default: default text
+              - label: url
+                name: url
+                widget: string
+                hint: >-
+                  Use a relative URL (e.g. /about) if the link is an internal
+                  link.
+              - label: Rel
+                name: rel
+                widget: select
+                options:
+                  - follow
+                  - no-follow
+                  - obfuscated
+                default: follow
+              - label: Target
+                name: target
+                widget: select
+                options:
+                  - self
+                  - blank
+                default: self
+          - label: Actions
+            name: actions
+            widget: list
+            fields:
+              - label: Label
+                name: label
+                widget: string
+                default: default text
+              - label: url
+                name: url
+                widget: string
+                hint: >-
+                  Use a relative URL (e.g. /about) if the link is an internal
+                  link.
+              - label: Rel
+                name: rel
+                widget: select
+                options:
+                  - follow
+                  - no-follow
+                  - obfuscated
+                default: follow
+              - label: Target
+                name: target
+                widget: select
+                options:
+                  - self
+                  - blank
+                default: self
+              - label: theme
+                name: theme
+                widget: select
+                options:
+                  - primary
+                  - secondary
+                default: primary
+  - name: footer
+    label: ⚽️ Footer
+    files:
+      - file: cms/footer/footer.md
+        label: Footer
+        name: footer
+        fields:
+          - label: type
+            name: type
+            widget: hidden
+            default: footer
+          - label: Logo
+            name: logo
+            widget: object
+            summary: "{{fields.src}}"
+            fields:
+              - label: src
+                name: src
+                widget: image
+                choose_url: false
+                default: ../assets/header.jpg
+                hint: >-
+                  the image should have a max with as 600px. You can use
+                  https://www.iloveimg.com/resize-image for online resizer and
+                  https://tinypng.com/ for compress images
+                media_library:
+                  config:
+                    max_file_size: 512000
+              - label: alt
+                name: alt
+                widget: string
+          - label: Tabs
+            name: tabs
+            widget: list
+            fields:
+              - label: Label
+                name: label
+                widget: string
+                default: default text
+              - label: url
+                name: url
+                widget: string
+                hint: >-
+                  Use a relative URL (e.g. /about) if the link is an internal
+                  link.
+              - label: Rel
+                name: rel
+                widget: select
+                options:
+                  - follow
+                  - no-follow
+                  - obfuscated
+                default: follow
+              - label: Target
+                name: target
+                widget: select
+                options:
+                  - self
+                  - blank
+                default: self
+          - label: Markup
+            name: markup
+            widget: string
+            default: default text
+          - label: Networks
+            name: networks
+            widget: list
+            fields:
+              - label: Label
+                name: label
+                widget: string
+                default: default text
+              - label: url
+                name: url
+                widget: string
+                hint: >-
+                  Use a relative URL (e.g. /about) if the link is an internal
+                  link.
+              - label: Rel
+                name: rel
+                widget: select
+                options:
+                  - follow
+                  - no-follow
+                  - obfuscated
+                default: follow
+              - label: Target
+                name: target
+                widget: select
+                options:
+                  - self
+                  - blank
+                default: self
+              - label: network
+                name: network
+                widget: select
+                options:
+                  - instagram
+                  - facebook
+                  - twitter
+                  - linkedin
+                  - github
+  - name: configuration
+    label: "\U0001F529 Configuration"
+    files:
+      - file: cms/configuration/cookies/cookies.json
+        label: "\U0001F36A Cookies"
+        name: cookies
+        fields:
+          - label: type
+            name: type
+            widget: hidden
+            default: cookies
+          - label: title
+            name: title
+            widget: string
+            default: Cookie Policy
+          - label: description
+            name: description
+            widget: string
+            default: We use third-party cookies in order to personalise your experience
+          - label: to
+            name: to
+            widget: object
+            summary: "{{fields.label}}"
+            collapsed: true
+            fields:
+              - label: Label
+                name: label
+                widget: string
+                default: default text
+              - label: url
+                name: url
+                widget: string
+                hint: >-
+                  Use a relative URL (e.g. /about) if the link is an internal
+                  link.
+              - label: Rel
+                name: rel
+                widget: select
+                options:
+                  - follow
+                  - no-follow
+                  - obfuscated
+                default: follow
+              - label: Target
+                name: target
+                widget: select
+                options:
+                  - self
+                  - blank
+                default: self
+          - label: button
+            name: button
+            widget: string
+            default: default text
+      - file: cms/configuration/robots.json
+        label: "\U0001F916 Robots.txt"
+        name: robots.txt
+        fields:
+          - label: type
+            name: type
+            widget: hidden
+            default: robots.txt
+          - label: Rules
+            name: rules
+            widget: list
+            create: true
+            fields:
+              - label: user-agent
+                name: userAgent
+                widget: string
+                default: default text
+              - label: allow
+                name: allow
+                widget: list
+                create: true
+                fields:
+                  - label: rule
+                    name: rule
+                    widget: string
+                    default: default text
+              - label: disallow
+                name: disallow
+                widget: list
+                create: true
+                fields:
+                  - label: rule
+                    name: rule
+                    widget: string
+                    default: default text
+      - file: cms/configuration/manifest.json
+        label: "\U0001FAA1 Manifest"
+        name: manifest
+        fields:
+          - label: type
+            name: type
+            widget: hidden
+            default: manifest
+          - label: name
+            name: name
+            widget: string
+            default: default text
+          - label: short_name
+            name: short_name
+            widget: string
+            default: default text
+          - label: background_color
+            name: background_color
+            widget: color
+          - label: theme_color
+            name: theme_color
+            widget: color
+          - label: display
+            name: display
+            widget: select
+            options:
+              - standalone
+          - label: icon
+            name: icon
+            widget: image
+            choose_url: false
+            media_library:
+              config:
+                max_file_size: 512000
+            hint: "please, choose a .svg file for better results"
+      - file: cms/configuration/language/language.json
+        label: "\U0001F30D Language"
+        name: language
+        fields:
+          - label: type
+            name: type
+            widget: hidden
+            default: language
+          - label: language
+            name: language
+            widget: string
+            default: default text
+            hint: >-
+              Please use ISO-639-1 codes, like (fr, en, es, de, pt…)
+              https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+      - file: cms/configuration/license.json
+        label: "\U0001F510 License"
+        name: license
+        fields:
+          - label: type
+            name: type
+            widget: hidden
+            default: license
+          - label: license
+            name: license
+            widget: string
+            default: default text
+          - label: domain
+            name: domain
+            widget: string
+            default: REPLACE_HERE
+      - file: cms/configuration/theme/theme.json
+        label: "\U0001F485 Theme"
+        name: theme
+        fields:
+          - label: type
+            name: type
+            widget: hidden
+            default: theme
+          - label: theme
+            name: theme
+            widget: select
+            options:
+              - dark
+              - green
+              - blue
+              - red
+              - yellow
+            default: dark
+      - file: cms/configuration/redirections/redirections.json
+        label: 3️⃣0️⃣1️⃣ Redirections
+        name: redirections
+        fields:
+          - label: type
+            name: type
+            widget: hidden
+            default: redirections
+          - label: Rules
+            name: rules
+            widget: list
+            create: true
+            fields:
+              - label: from
+                name: from
+                widget: string
+                default: ""
+                hint: >-
+                  use relative url (/my-url) if you want to redirect internal
+                  pages
+              - label: to
+                name: to
+                widget: string
+                default: ""
+                hint: >-
+                  use relative url (/my-url) if you want to redirect internal
+                  pages
+              - label: statusCode
+                name: statusCode
+                widget: select
+                options:
+                  - "301"
+                default: "301"

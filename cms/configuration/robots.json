@@ -1,0 +1,15 @@
+{
+  "rules": [
+    {
+      "userAgent": "*",
+      "disallow": [
+        {
+          "rule": ".js"
+        }
+      ]
+    },
+    {
+      "userAgent": "mobile"
+    }
+  ]
+}
