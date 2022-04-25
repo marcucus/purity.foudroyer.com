@@ -1,28 +1,30 @@
 ---
-type: "drawer"
+type: drawer
 logo:
   src: ../assets/logo.svg
   alt: logo
 tabs:
   - type: follow
-    label: Exemples de haïkus
-    url: /exemples-de-haiku
-  - type: follow
-    label: Exemples de haïkus japonais
-    url: /exemples-de-haiku/japonais
-  - type: follow
-    label: Recueils
-    url: /recueils
+    label: Tutoriels
+    url: /tutoriels/
+    rel: follow
+    target: self
   - type: follow
     label: Politique de confidentialité
     url: /politique
+    rel: follow
+    target: self
 actions:
   - type: follow
     theme: primary
-    label: Se connecter
-    url: /login
+    label: Créer un site gratuitement
+    url: /tutoriels/creer-son-premier-site/
+    rel: follow
+    target: self
   - type: follow
     theme: secondary
-    label: Créer un compte
-    url: /signup
+    label: Se rendre sur Foudroyer
+    url: https://dashboard.foudroyer.com
+    rel: follow
+    target: blank
 ---
