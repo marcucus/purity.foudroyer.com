@@ -1,11 +1,11 @@
-name: Publish
+name: Upgrade
 
 "on":
   schedule:
-    - cron: "0 0 1,7,14,21,28 * *"
+    - cron: "0 0 * * *"
 
 jobs:
-  publish:
+  upgrade:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

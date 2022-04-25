@@ -2,23 +2,29 @@
 type: header
 logo:
   src: ../assets/logo.svg
-  alt: logo
+  alt: logo de foudroyer
 tabs:
   - type: follow
     theme: link
-    label: Exemples de haïku
-    url: /exemples-de-haiku
-  - type: follow
+    label: Tutoriels
+    url: /tutoriels
+    rel: follow
+    target: self
+  - label: Fonctionnalités
+    rel: follow
+    target: self
     theme: link
-    label: Gastronomie Japonaise
-    url: /gastronomie-japonaise
+    url: /fonctionnatites
+  - label: Prix
+    rel: follow
+    target: self
+    theme: link
+    url: /prix
 right:
   - type: follow
-    theme: link
-    label: Se connecter
-    url: /se-connecter
-  - type: follow
     theme: button
-    label: Créer un compte
+    label: Créer un site gratuitement
     url: /creer-un-compte
+    rel: no-follow
+    target: blank
 ---
