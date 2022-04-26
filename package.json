@@ -79,7 +79,7 @@
     "check:upgrade": "node scripts/upgrade",
     "build": "gatsby build",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "start": "gatsby clean && gatsby develop -H 0.0.0.0",
+    "start": "gatsby develop -H 0.0.0.0",
     "proxy": "netlify-cms-proxy-server",
     "serve": "gatsby serve",
     "clean": "gatsby clean",

@@ -1,1 +1,1 @@
-import "@foudroyer/purity/dist/css/index.css"
+require("@foudroyer/purity/dist/css/index.css")
