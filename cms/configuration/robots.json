@@ -4,12 +4,9 @@
       "userAgent": "*",
       "disallow": [
         {
-          "rule": ".js"
+          "rule": "*.js"
         }
       ]
-    },
-    {
-      "userAgent": "mobile"
     }
   ]
 }

@@ -1,0 +1,17 @@
+{
+  "label": "Error 404",
+  "title": "Page not found",
+  "description": "Something went wrong, so this page is broken.",
+  "button": {
+    "label": "Go back to Homepage",
+    "url": "/",
+    "rel": "follow",
+    "target": "self",
+    "theme": "primary"
+  },
+  "meta": {
+    "indexable": false,
+    "title": "Not found",
+    "description": "Something went wrong, so this page is broken."
+  }
+}
